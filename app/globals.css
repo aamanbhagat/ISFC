@@ -812,9 +812,9 @@ img {
   gap: 0.5rem;
   margin-top: var(--space-xl);
   padding: 0.4rem 0.8rem;
-  border: 1.5px solid var(--spark);
-  color: var(--spark-press);
-  background: var(--spark-soft);
+  border: 1.5px solid var(--ok);
+  color: #0a7d4d;
+  background: color-mix(in srgb, var(--ok) 10%, var(--surface));
   border-radius: var(--radius);
   font-size: var(--text-sm);
   font-weight: 700;

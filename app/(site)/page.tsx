@@ -1,12 +1,7 @@
 import Link from 'next/link';
-import {
-  ArrowRight,
-  Building2,
-  MapPin,
-  Search,
-  ShieldCheck,
-} from 'lucide-react';
+import { ArrowRight, Building2, MapPin, ShieldCheck } from 'lucide-react';
 import { BranchList } from '@/components/BranchList';
+import { SearchBar } from '@/components/SearchBar';
 import { SchemaOrg } from '@/components/SchemaOrg';
 import { getPopularBranches, listBanks, listStates } from '@/lib/db';
 import { buildOrganizationSchema, buildWebsiteSchema } from '@/lib/schema';
@@ -42,13 +37,7 @@ export default async function HomePage() {
             transfer support, drawn straight from the Reserve Bank of India
             dataset.
           </p>
-          <button type="button" className="hero-search-btn" data-search-open>
-            <Search aria-hidden />
-            <span className="hero-search-btn__label">
-              Search IFSC, bank, branch or city…
-            </span>
-            <span className="kbd">⌘K</span>
-          </button>
+          <SearchBar autoFocus />
           <p className="hero-stat">
             <span>
               <strong>{banks.length.toLocaleString('en-IN')}</strong> BANKS
