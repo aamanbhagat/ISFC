@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import Script from 'next/script';
 import { Space_Grotesk, Inter, Space_Mono } from 'next/font/google';
+import { Analytics } from '@vercel/analytics/next';
 import './globals.css';
 import { SITE_NAME, SITE_URL } from '@/lib/seo';
 
@@ -72,6 +73,7 @@ export default function RootLayout({
           Skip to content
         </a>
         {children}
+        <Analytics />
 
         {GA_ENABLED && (
           <>
