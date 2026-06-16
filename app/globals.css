@@ -499,7 +499,7 @@ img {
   position: relative;
   padding: var(--space-3xl) 0 var(--space-2xl);
   border-bottom: 1px solid var(--line);
-  overflow: hidden;
+  /* no overflow:hidden — it would clip the search suggestions dropdown */
 }
 .hero::before {
   /* a single crosshair, top-right, like a drawing origin */
@@ -681,7 +681,7 @@ img {
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-lg);
   overflow: hidden;
-  z-index: 30;
+  z-index: 50;
 }
 .search-result {
   display: flex;
