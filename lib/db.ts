@@ -357,15 +357,22 @@ export async function searchBranches(
     return b ? [toSummary(b)] : [];
   }
 
+  // Multi-word: every token must appear somewhere in the record, so
+  // "hdfc mumbai" or "sbi delhi" work the way people type them.
+  const tokens = q.split(/\s+/).filter(Boolean).slice(0, 6);
+
   if (isTursoConfigured()) {
-    const like = `%${q}%`;
-    const prefix = `${q}%`;
+    const haystack =
+      "(bank_name||' '||branch||' '||city||' '||state||' '||ifsc)";
+    const where = tokens.map(() => `${haystack} LIKE ?`).join(' AND ');
+    const args: (string | number)[] = tokens.map((t) => `%${t}%`);
+    args.push(`${tokens[0]}%`, limit);
     const res = await db().execute({
       sql: `select ifsc, bank_name, branch, city, state from branches
-            where ifsc like ? or bank_name like ? or branch like ? or city like ?
-            order by case when ifsc like ? then 0 else 1 end, branch asc
+            where ${where}
+            order by case when ifsc like ? then 0 else 1 end, length(branch) asc
             limit ?`,
-      args: [prefix, like, like, like, prefix, limit],
+      args,
     });
     return res.rows.map((r) => ({
       ifsc: String(r.ifsc),
@@ -376,14 +383,11 @@ export async function searchBranches(
     }));
   }
 
-  const needle = q.toLowerCase();
-  return SAMPLE.filter(
-    (b) =>
-      b.ifsc.toLowerCase().includes(needle) ||
-      b.bankName.toLowerCase().includes(needle) ||
-      b.branch.toLowerCase().includes(needle) ||
-      b.city.toLowerCase().includes(needle),
-  )
+  const needles = tokens.map((t) => t.toLowerCase());
+  return SAMPLE.filter((b) => {
+    const hay = `${b.bankName} ${b.branch} ${b.city} ${b.state} ${b.ifsc}`.toLowerCase();
+    return needles.every((n) => hay.includes(n));
+  })
     .slice(0, limit)
     .map(toSummary);
 }

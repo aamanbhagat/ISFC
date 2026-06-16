@@ -1,6 +1,7 @@
 import Link from 'next/link';
-import { SITE_NAME } from '@/lib/seo';
-import { urls } from '@/lib/seo';
+import { Search } from 'lucide-react';
+import { CommandPalette } from '@/components/CommandPalette';
+import { SITE_NAME, urls } from '@/lib/seo';
 
 const YEAR = new Date().getFullYear();
 
@@ -22,9 +23,17 @@ export default function SiteLayout({
 }) {
   return (
     <>
+      <CommandPalette />
+
       <header className="site-header">
         <div className="shell masthead">
           <Wordmark />
+          <div className="masthead__spacer" />
+          <button type="button" className="kbd-btn" data-search-open aria-label="Search">
+            <Search aria-hidden />
+            <span className="kbd-btn__label">Search branches…</span>
+            <span className="kbd">⌘K</span>
+          </button>
           <nav className="site-nav" aria-label="Browse">
             <Link href={urls.bankIndex()} className="nav-link">
               Banks

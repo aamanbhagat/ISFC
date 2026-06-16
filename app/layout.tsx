@@ -1,31 +1,27 @@
 import type { Metadata, Viewport } from 'next';
-import {
-  Bricolage_Grotesque,
-  IBM_Plex_Sans,
-  IBM_Plex_Mono,
-} from 'next/font/google';
+import { Space_Grotesk, Inter, Space_Mono } from 'next/font/google';
 import './globals.css';
 import { SITE_NAME, SITE_URL } from '@/lib/seo';
 
-// Display — characterful grotesque, used with restraint (wordmark, headings).
-const display = Bricolage_Grotesque({
+// Display — technical grotesque (headings, wordmark, hero).
+const display = Space_Grotesk({
   subsets: ['latin'],
+  weight: ['500', '600', '700'],
   display: 'swap',
   variable: '--font-display',
 });
 
-// Body & UI — clear at small sizes on low-end screens.
-const body = IBM_Plex_Sans({
+// Body & UI — neutral, like the annotation text on an engineering drawing.
+const body = Inter({
   subsets: ['latin'],
-  weight: ['400', '500', '600'],
   display: 'swap',
   variable: '--font-body',
 });
 
-// The hero role: the IFSC code rendered as a precision instrument.
-const mono = IBM_Plex_Mono({
+// The hero role: the IFSC code as a machine-cut coordinate string.
+const mono = Space_Mono({
   subsets: ['latin'],
-  weight: ['500', '600'],
+  weight: ['400', '700'],
   display: 'swap',
   variable: '--font-mono',
 });
@@ -33,7 +29,7 @@ const mono = IBM_Plex_Mono({
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  themeColor: '#0b5d3b',
+  themeColor: '#0b0e14',
 };
 
 export const metadata: Metadata = {
