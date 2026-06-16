@@ -1,31 +1,28 @@
 import type { Metadata, Viewport } from 'next';
-import {
-  Bricolage_Grotesque,
-  IBM_Plex_Sans,
-  IBM_Plex_Mono,
-} from 'next/font/google';
+import { Sora, Plus_Jakarta_Sans, JetBrains_Mono } from 'next/font/google';
 import './globals.css';
 import { SITE_NAME, SITE_URL } from '@/lib/seo';
 
-// Display — characterful grotesque, used with restraint (wordmark, headings).
-const display = Bricolage_Grotesque({
+// Display — geometric, precise, modern fintech voice (hero, headings, wordmark).
+const display = Sora({
   subsets: ['latin'],
+  weight: ['500', '600', '700', '800'],
   display: 'swap',
   variable: '--font-display',
 });
 
-// Body & UI — clear at small sizes on low-end screens.
-const body = IBM_Plex_Sans({
+// Body & UI — humanist, friendly, clear on low-end screens.
+const body = Plus_Jakarta_Sans({
   subsets: ['latin'],
-  weight: ['400', '500', '600'],
+  weight: ['400', '500', '600', '700'],
   display: 'swap',
   variable: '--font-body',
 });
 
-// The hero role: the IFSC code rendered as a precision instrument.
-const mono = IBM_Plex_Mono({
+// The hero role: the IFSC routing code, set as a machine-cut monospace.
+const mono = JetBrains_Mono({
   subsets: ['latin'],
-  weight: ['500', '600'],
+  weight: ['500', '700'],
   display: 'swap',
   variable: '--font-mono',
 });
@@ -33,7 +30,7 @@ const mono = IBM_Plex_Mono({
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  themeColor: '#0b5d3b',
+  themeColor: '#0a0e28',
 };
 
 export const metadata: Metadata = {
