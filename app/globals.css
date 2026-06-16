@@ -26,7 +26,9 @@
   --spark-press: #e64a12;
   --spark-soft: #fff0ea;
 
-  --ok: #0c9f63;
+  --ok: #16a34a;
+  --ok-press: #0c7a37;
+  --ok-soft: #e7f8ee;
 
   /* Type scale */
   --text-xs: 0.75rem;
@@ -812,9 +814,9 @@ img {
   gap: 0.5rem;
   margin-top: var(--space-xl);
   padding: 0.4rem 0.8rem;
-  border: 1.5px solid var(--ok);
-  color: #0a7d4d;
-  background: color-mix(in srgb, var(--ok) 10%, var(--surface));
+  border: 1.5px solid color-mix(in srgb, var(--ok) 45%, var(--line));
+  color: var(--ok-press);
+  background: var(--ok-soft);
   border-radius: var(--radius);
   font-size: var(--text-sm);
   font-weight: 700;
@@ -847,9 +849,9 @@ img {
   background: var(--accent-soft);
 }
 .copy-btn[data-copied] {
-  border-color: var(--ok);
-  color: var(--ok);
-  background: color-mix(in srgb, var(--ok) 10%, var(--surface));
+  border-color: color-mix(in srgb, var(--ok) 45%, var(--line));
+  color: var(--ok-press);
+  background: var(--ok-soft);
 }
 .copy-btn__icon {
   width: 1rem;
@@ -877,9 +879,9 @@ img {
   font-family: var(--font-mono), monospace;
 }
 .transfer[data-on] {
-  border-color: color-mix(in srgb, var(--accent) 35%, var(--line));
-  background: var(--accent-soft);
-  color: var(--accent-ink);
+  border-color: color-mix(in srgb, var(--ok) 38%, var(--line));
+  background: var(--ok-soft);
+  color: var(--ok-press);
 }
 .transfer__icon {
   width: 0.95rem;

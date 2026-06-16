@@ -94,7 +94,7 @@ export function CommandPalette() {
       } catch {
         /* aborted — keep loading until the next request settles */
       }
-    }, 160);
+    }, 110);
     return () => {
       ctrl.abort();
       window.clearTimeout(t);

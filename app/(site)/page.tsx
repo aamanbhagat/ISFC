@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowRight, Building2, MapPin, ShieldCheck } from 'lucide-react';
 import { BranchList } from '@/components/BranchList';
@@ -5,9 +6,13 @@ import { SearchBar } from '@/components/SearchBar';
 import { SchemaOrg } from '@/components/SchemaOrg';
 import { getPopularBranches, listBanks, listStates } from '@/lib/db';
 import { buildOrganizationSchema, buildWebsiteSchema } from '@/lib/schema';
-import { DATA_RELEASE, SITE_NAME, urls } from '@/lib/seo';
+import { DATA_RELEASE, SITE_NAME, SITE_URL, urls } from '@/lib/seo';
 
 export const revalidate = 604800; // 7d — corpus changes quarterly
+
+export const metadata: Metadata = {
+  alternates: { canonical: SITE_URL },
+};
 
 export default async function HomePage() {
   const [popular, banks, states] = await Promise.all([
