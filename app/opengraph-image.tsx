@@ -66,7 +66,7 @@ export default function OgImage() {
           </div>
         </div>
 
-        <div style={{ fontSize: 22, color: '#8b93a4' }}>ifsckosh.in</div>
+        <div style={{ fontSize: 22, color: '#8b93a4' }}>ifsckosh.tech</div>
       </div>
     ),
     { ...size },

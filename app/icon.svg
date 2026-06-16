@@ -1,5 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="IFSCKosh">
-  <rect width="64" height="64" rx="14" fill="#0b5d3b"/>
-  <rect x="10" y="40" width="44" height="3.5" rx="1.75" fill="#a9772e"/>
-  <text x="32" y="35" text-anchor="middle" font-family="'IBM Plex Mono','Courier New',monospace" font-size="26" font-weight="600" fill="#ffffff" letter-spacing="1">IK</text>
+  <rect width="64" height="64" rx="13" fill="#0b0e14"/>
+  <!-- registration crosshair, top-right (blueprint motif) -->
+  <path d="M50 9 v9 M45.5 13.5 h9" stroke="#1a56ff" stroke-width="2.4" stroke-linecap="round"/>
+  <!-- monospace IK -->
+  <text x="32" y="40" text-anchor="middle" font-family="'Space Mono','JetBrains Mono',monospace" font-size="27" font-weight="700" fill="#ffffff" letter-spacing="1">IK</text>
+  <!-- baseline rule -->
+  <rect x="14" y="49" width="36" height="3" rx="1.5" fill="#1a56ff"/>
 </svg>

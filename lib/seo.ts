@@ -3,7 +3,7 @@
 // is ever missing in a deploy, canonicals, sitemaps and JSON-LD still point at
 // the real domain. Local dev sets NEXT_PUBLIC_SITE_URL=http://localhost:3000.
 export const SITE_URL = (
-  process.env.NEXT_PUBLIC_SITE_URL || 'https://ifsckosh.in'
+  process.env.NEXT_PUBLIC_SITE_URL || 'https://ifsckosh.tech'
 ).replace(/\/$/, '');
 
 export const SITE_NAME = 'IFSCKosh';
@@ -14,7 +14,7 @@ export const DATA_SOURCE = 'Reserve Bank of India, via the razorpay/ifsc dataset
 export const DATA_RELEASE = 'December 2025';
 
 export const CONTACT_EMAIL =
-  process.env.NEXT_PUBLIC_CONTACT_EMAIL || 'contact@ifsckosh.in';
+  process.env.NEXT_PUBLIC_CONTACT_EMAIL || 'contact@ifsckosh.tech';
 
 export const SOCIAL_LINKS = (process.env.NEXT_PUBLIC_SOCIAL_LINKS || '')
   .split(',')

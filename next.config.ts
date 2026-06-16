@@ -13,8 +13,8 @@ const nextConfig: NextConfig = {
     return [
       {
         source: '/:path*',
-        has: [{ type: 'host', value: 'www.ifsckosh.in' }],
-        destination: 'https://ifsckosh.in/:path*',
+        has: [{ type: 'host', value: 'www.ifsckosh.tech' }],
+        destination: 'https://ifsckosh.tech/:path*',
         permanent: true,
       },
       {
