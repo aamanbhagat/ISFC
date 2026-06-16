@@ -321,7 +321,7 @@ img {
   border: 1px solid var(--line-2);
   border-radius: var(--radius);
   background: var(--surface);
-  color: var(--faint);
+  color: var(--muted);
   font-size: var(--text-sm);
   cursor: pointer;
   min-width: 13rem;
@@ -447,7 +447,7 @@ img {
 }
 .cmdk-empty {
   padding: var(--space-xl) var(--space-md);
-  color: var(--faint);
+  color: var(--muted);
   text-align: center;
   font-size: var(--text-sm);
 }
@@ -714,7 +714,7 @@ img {
 }
 .search-empty {
   padding: var(--space-md);
-  color: var(--faint);
+  color: var(--muted);
   font-size: var(--text-sm);
 }
 
@@ -872,7 +872,7 @@ img {
   padding: 0.4rem 0.85rem;
   border: 1px solid var(--line);
   background: var(--surface);
-  color: var(--faint);
+  color: var(--muted);
   font-size: var(--text-sm);
   font-weight: 600;
   border-radius: var(--radius);
@@ -1000,7 +1000,7 @@ img {
 }
 .branch-row__loc {
   font-weight: 400;
-  color: var(--faint);
+  color: var(--muted);
   font-size: var(--text-xs);
 }
 .branch-row__ifsc {
@@ -1256,6 +1256,12 @@ img {
   border-radius: var(--radius);
   padding: var(--space-lg);
   color: var(--ink-2);
+}
+/* Inline links inside body text must not rely on colour alone. */
+.note a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  font-weight: 600;
 }
 
 /* ═══ Footer ═════════════════════════════════════════════════ */
