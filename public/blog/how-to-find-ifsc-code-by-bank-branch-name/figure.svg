@@ -4,6 +4,6 @@
   </linearGradient></defs>
   <rect width="1200" height="630" fill="url(#g)"/>
   <text x="80" y="120" font-family="system-ui,Segoe UI,Arial" font-size="26" fill="#93c5fd" letter-spacing="3">GUIDES</text>
-  <text x="80" y="300" font-family="system-ui,Segoe UI,Arial" font-size="64" font-weight="700" fill="#ffffff"><tspan x="80" dy="0">How to find your bank's</tspan><tspan x="80" dy="76">MICR code: step-by-step</tspan><tspan x="80" dy="76">guide</tspan></text>
+  <text x="80" y="300" font-family="system-ui,Segoe UI,Arial" font-size="64" font-weight="700" fill="#ffffff"><tspan x="80" dy="0">How to Find IFSC Code by</tspan><tspan x="80" dy="76">Bank Branch Name</tspan></text>
   <text x="80" y="560" font-family="system-ui,Segoe UI,Arial" font-size="30" font-weight="600" fill="#e2e8f0">IFSCKosh</text>
 </svg>
