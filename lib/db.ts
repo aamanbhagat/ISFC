@@ -1,7 +1,9 @@
 import 'server-only';
 import { cache } from 'react';
-import { createClient, type Client, type Row } from '@libsql/client';
+import postgres from 'postgres';
 import sampleRaw from '@/data/sample-branches.json';
+
+type Row = Record<string, unknown>;
 import { normalizeRaw } from '@/lib/ifsc';
 import type {
   BankSummary,
@@ -13,9 +15,9 @@ import type {
   StateGroup,
 } from '@/types/ifsc';
 
-// Data resolves Turso (libSQL) → bundled sample. Reads are deduped within a
-// request with React `cache`; freshness comes from page-level `revalidate`
-// (ISR). When TURSO_* env vars are absent the whole site runs off the bundled
+// Data resolves Supabase (Postgres) → bundled sample. Reads are deduped within
+// a request with React `cache`; freshness comes from page-level `revalidate`
+// (ISR). When SUPABASE_DB_URL is absent the whole site runs off the bundled
 // sample so it boots with zero configuration.
 
 export const PER_PAGE = 50;
@@ -23,19 +25,45 @@ export const PER_PAGE = 50;
 // Stable corpus timestamp — see getLatestUpdatedAt. Sample rows all share it.
 const SAMPLE_UPDATED_AT = '2025-12-17T00:00:00.000Z';
 
-// ── Turso client ─────────────────────────────────────────────
-let _client: Client | null = null;
+// ── Supabase (Postgres) client ───────────────────────────────
+// A thin adapter keeps the libSQL-shaped call sites unchanged: `execute()`
+// accepts a SQL string or `{ sql, args }`, rewrites `?` placeholders to
+// Postgres `$n`, maps SQLite's case-insensitive LIKE to ILIKE, and returns
+// `{ rows }`.
+type Sql = ReturnType<typeof postgres>;
+let _sql: Sql | null = null;
 function isTursoConfigured(): boolean {
-  return Boolean(process.env.TURSO_DATABASE_URL);
+  return Boolean(process.env.SUPABASE_DB_URL);
 }
-function db(): Client {
-  if (!_client) {
-    _client = createClient({
-      url: process.env.TURSO_DATABASE_URL as string,
-      authToken: process.env.TURSO_AUTH_TOKEN,
+function rawSql(): Sql {
+  if (!_sql) {
+    _sql = postgres(process.env.SUPABASE_DB_URL as string, {
+      prepare: false, // transaction pooler (pgBouncer) — no prepared statements
+      idle_timeout: 20,
+      connect_timeout: 30,
+      max: 12,
     });
   }
-  return _client;
+  return _sql;
+}
+
+function toPg(sql: string): string {
+  let n = 0;
+  return sql
+    .replace(/\?/g, () => `$${++n}`)
+    .replace(/\bLIKE\b/gi, 'ILIKE');
+}
+
+type ExecArg = string | { sql: string; args?: unknown[] };
+function db() {
+  return {
+    async execute(arg: ExecArg): Promise<{ rows: Row[] }> {
+      const text = typeof arg === 'string' ? arg : arg.sql;
+      const args = typeof arg === 'string' ? [] : arg.args ?? [];
+      const rows = (await rawSql().unsafe(toPg(text), args as never[])) as unknown as Row[];
+      return { rows };
+    },
+  };
 }
 
 // ── Sample fallback (normalized once) ────────────────────────
@@ -179,7 +207,7 @@ export const getStatesForBank = cache(
     if (isTursoConfigured()) {
       const res = await db().execute({
         sql: `select state, state_slug, count(*) as c from branches
-              where bank_slug = ? group by state_slug order by state asc`,
+              where bank_slug = ? group by state_slug, state order by state asc`,
         args: [bankSlug],
       });
       return res.rows.map((r) => ({
@@ -197,9 +225,9 @@ export const getCitiesForBankState = cache(
   async (bankSlug: string, stateSlug: string): Promise<CityGroup[]> => {
     if (isTursoConfigured()) {
       const res = await db().execute({
-        sql: `select city, city_slug, district, count(*) as c from branches
+        sql: `select city, city_slug, min(district) as district, count(*) as c from branches
               where bank_slug = ? and state_slug = ?
-              group by city_slug order by city asc`,
+              group by city_slug, city order by city asc`,
         args: [bankSlug, stateSlug],
       });
       return res.rows.map((r) => ({
@@ -271,7 +299,7 @@ export const listStates = cache(async (): Promise<StateGroup[]> => {
   if (isTursoConfigured()) {
     const res = await db().execute(
       `select state, state_slug, count(*) as c from branches
-       group by state_slug order by state asc`,
+       group by state_slug, state order by state asc`,
     );
     return res.rows.map((r) => ({
       state: String(r.state),
@@ -286,10 +314,10 @@ export const getBanksForState = cache(
   async (stateSlug: string): Promise<BankSummary[]> => {
     if (isTursoConfigured()) {
       const res = await db().execute({
-        sql: `select b.bank_slug as slug, b.bank_code as code, b.bank_name as name,
+        sql: `select b.bank_slug as slug, min(b.bank_code) as code, min(b.bank_name) as name,
                      count(*) as c
               from branches b where b.state_slug = ?
-              group by b.bank_slug order by b.bank_name asc`,
+              group by b.bank_slug order by name asc`,
         args: [stateSlug],
       });
       return res.rows.map((r) => ({
@@ -326,9 +354,10 @@ export const getPopularBranches = cache(
     if (isTursoConfigured()) {
       // One flagship branch per major bank — a stable, hand-picked spread.
       const res = await db().execute({
-        sql: `select ifsc, bank_name, branch, city, state from branches
+        sql: `select distinct on (bank_code) ifsc, bank_name, branch, city, state
+              from branches
               where bank_code in ('SBIN','HDFC','ICIC','UTIB','PUNB','KKBK','BARB','CNRB','UBIN','BKID')
-              group by bank_code limit ?`,
+              order by bank_code limit ?`,
         args: [limit],
       });
       return res.rows.map((r) => ({
@@ -459,7 +488,7 @@ export interface CityHubParam {
 export async function countCityHubs(): Promise<number> {
   if (isTursoConfigured()) {
     const res = await db().execute(
-      'select count(*) as c from (select 1 from branches group by bank_slug, state_slug, city_slug)',
+      'select count(*) as c from (select 1 from branches group by bank_slug, state_slug, city_slug) sub',
     );
     return Number(res.rows[0]?.c ?? 0);
   }

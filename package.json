@@ -7,14 +7,21 @@
     "build": "next build",
     "start": "next start",
     "typecheck": "tsc --noEmit",
-    "sync": "node --env-file=.env.local --import tsx scripts/sync-ifsc.ts"
+    "sync": "node --env-file=.env.local --import tsx scripts/sync-supabase.ts"
   },
   "dependencies": {
-    "@libsql/client": "^0.15.4",
+    "github-slugger": "^2.0.0",
+    "gray-matter": "^4.0.3",
     "lucide-react": "^1.18.0",
     "next": "16.2.9",
+    "next-mdx-remote": "^6.0.0",
+    "postgres": "^3.4.9",
     "react": "19.2.4",
     "react-dom": "19.2.4",
+    "reading-time": "^1.5.0",
+    "rehype-autolink-headings": "^7.1.0",
+    "rehype-slug": "^6.0.0",
+    "remark-gfm": "^4.0.1",
     "server-only": "^0.0.1"
   },
   "devDependencies": {

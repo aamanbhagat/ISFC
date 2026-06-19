@@ -1,0 +1,16 @@
+{
+  "siteName": "IFSCKosh",
+  "siteUrl": "https://ifsckosh.tech",
+  "niche": "Indian bank IFSC/MICR/SWIFT codes, NEFT/RTGS/IMPS/UPI transfers, and bank branch lookups",
+  "audience": "Indians searching for a bank branch's IFSC code, transfer rules, or how bank codes work",
+  "topicGuidance": "Prefer practical, high-intent topics: how to find an IFSC code, NEFT vs RTGS vs IMPS, MICR code meaning, SWIFT codes for international transfers, bank-specific guides, transfer limits and timings. Use accurate RBI/NPCI context.",
+  "coverColors": ["#0b3d2e", "#10b981"],
+  "categories": [
+    { "slug": "guides", "name": "Guides" },
+    { "slug": "transfers", "name": "Money Transfers" },
+    { "slug": "banking", "name": "Banking Basics" }
+  ],
+  "authors": [
+    { "slug": "ifsckosh-desk", "name": "IFSCKosh Desk" }
+  ]
+}

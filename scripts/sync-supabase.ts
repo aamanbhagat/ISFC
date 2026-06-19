@@ -1,5 +1,5 @@
 /**
- * sync-ifsc — load the RBI/razorpay IFSC dataset into Turso (libSQL).
+ * sync-supabase — load the RBI/razorpay IFSC dataset into Supabase (Postgres).
  *
  * Idempotent. Run quarterly after a new razorpay/ifsc release:
  *
@@ -8,20 +8,18 @@
  *   2. Point the script at it and run:
  *
  *        IFSC_DATASET_URL=/path/to/IFSC.csv npm run sync
- *        # or a remote URL, or a .json array of the raw records
  *
- * Requires TURSO_DATABASE_URL (+ TURSO_AUTH_TOKEN) in .env.local.
+ * Requires SUPABASE_DB_URL (Postgres connection string) in .env.local.
  */
 import { readFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
-import { createClient } from '@libsql/client';
+import postgres from 'postgres';
 import { normalizeRaw } from '../lib/ifsc';
 import type { BranchRow, RawBranch } from '../types/ifsc';
 
 const SRC = process.env.IFSC_DATASET_URL;
-const DB_URL = process.env.TURSO_DATABASE_URL;
-const DB_TOKEN = process.env.TURSO_AUTH_TOKEN;
-const BATCH = 800;
+const DB_URL = process.env.SUPABASE_DB_URL;
+const BATCH = 2000;
 
 function die(msg: string): never {
   console.error(`\n✖ ${msg}\n`);
@@ -104,7 +102,6 @@ function nstr(v: unknown): string | null {
   return s ? s : null;
 }
 
-// Map an arbitrary header record to a RawBranch.
 function coerce(rec: Record<string, unknown>): RawBranch {
   return {
     IFSC: str(rec.IFSC),
@@ -127,14 +124,14 @@ function coerce(rec: Record<string, unknown>): RawBranch {
   };
 }
 
-// ── Schema ───────────────────────────────────────────────────
+// ── Schema (Postgres) ────────────────────────────────────────
 const SCHEMA = [
   `CREATE TABLE IF NOT EXISTS branches (
      ifsc TEXT PRIMARY KEY, bank_code TEXT, bank_name TEXT, bank_slug TEXT,
      branch TEXT, centre TEXT, district TEXT, state TEXT, state_slug TEXT,
      city TEXT, city_slug TEXT, address TEXT, contact TEXT, micr TEXT,
-     swift TEXT, iso3166 TEXT, upi INTEGER, imps INTEGER, rtgs INTEGER,
-     neft INTEGER, updated_at TEXT
+     swift TEXT, iso3166 TEXT, upi SMALLINT, imps SMALLINT, rtgs SMALLINT,
+     neft SMALLINT, updated_at TEXT
    )`,
   `CREATE TABLE IF NOT EXISTS banks (
      slug TEXT PRIMARY KEY, code TEXT, name TEXT, branch_count INTEGER, updated_at TEXT
@@ -154,20 +151,22 @@ const COLUMNS = [
   'ifsc', 'bank_code', 'bank_name', 'bank_slug', 'branch', 'centre', 'district',
   'state', 'state_slug', 'city', 'city_slug', 'address', 'contact', 'micr',
   'swift', 'iso3166', 'upi', 'imps', 'rtgs', 'neft', 'updated_at',
-];
+] as const;
 
-function rowArgs(b: BranchRow) {
-  return [
-    b.ifsc, b.bankCode, b.bankName, b.bankSlug, b.branch, b.centre, b.district,
-    b.state, b.stateSlug, b.city, b.citySlug, b.address, b.contact, b.micr,
-    b.swift, b.iso3166, b.upi ? 1 : 0, b.imps ? 1 : 0, b.rtgs ? 1 : 0,
-    b.neft ? 1 : 0, b.updatedAt,
-  ];
+function toRecord(b: BranchRow): Record<string, unknown> {
+  return {
+    ifsc: b.ifsc, bank_code: b.bankCode, bank_name: b.bankName, bank_slug: b.bankSlug,
+    branch: b.branch, centre: b.centre, district: b.district, state: b.state,
+    state_slug: b.stateSlug, city: b.city, city_slug: b.citySlug, address: b.address,
+    contact: b.contact, micr: b.micr, swift: b.swift, iso3166: b.iso3166,
+    upi: b.upi ? 1 : 0, imps: b.imps ? 1 : 0, rtgs: b.rtgs ? 1 : 0,
+    neft: b.neft ? 1 : 0, updated_at: b.updatedAt,
+  };
 }
 
 // ── Main ─────────────────────────────────────────────────────
 async function main() {
-  if (!DB_URL) die('TURSO_DATABASE_URL is not set (see .env.example).');
+  if (!DB_URL) die('SUPABASE_DB_URL is not set (see .env.example).');
 
   console.log('• Loading dataset…');
   const raw = await loadSource();
@@ -178,41 +177,39 @@ async function main() {
   console.log(`  parsed ${rows.length.toLocaleString()} branches`);
   if (rows.length === 0) die('No valid rows parsed — check the source format.');
 
-  const db = createClient({ url: DB_URL, authToken: DB_TOKEN });
+  const sql = postgres(DB_URL, { prepare: false, idle_timeout: 20, max: 4 });
 
-  console.log('• Creating schema…');
-  for (const sql of SCHEMA) await db.execute(sql);
-  await db.execute('DELETE FROM branches');
-  await db.execute('DELETE FROM banks');
+  try {
+    console.log('• Creating schema…');
+    for (const ddl of SCHEMA) await sql.unsafe(ddl);
+    await sql`DELETE FROM branches`;
+    await sql`DELETE FROM banks`;
 
-  console.log('• Inserting branches…');
-  const placeholders = `(${COLUMNS.map(() => '?').join(',')})`;
-  const insertSql = `INSERT OR REPLACE INTO branches (${COLUMNS.join(',')}) VALUES ${placeholders}`;
-  for (let i = 0; i < rows.length; i += BATCH) {
-    const chunk = rows.slice(i, i + BATCH);
-    await db.batch(
-      chunk.map((b) => ({ sql: insertSql, args: rowArgs(b) })),
-      'write',
+    console.log('• Inserting branches…');
+    for (let i = 0; i < rows.length; i += BATCH) {
+      const chunk = rows.slice(i, i + BATCH).map(toRecord);
+      await sql`INSERT INTO branches ${sql(chunk, ...COLUMNS)}`;
+      process.stdout.write(`\r  ${Math.min(i + BATCH, rows.length)}/${rows.length}`);
+    }
+    process.stdout.write('\n');
+
+    console.log('• Building bank aggregates…');
+    await sql`
+      INSERT INTO banks (slug, code, name, branch_count, updated_at)
+      SELECT bank_slug, MIN(bank_code), MIN(bank_name), COUNT(*), ${updatedAt}
+      FROM branches GROUP BY bank_slug
+    `;
+
+    console.log('• Creating indexes…');
+    for (const ddl of INDEXES) await sql.unsafe(ddl);
+
+    const banks = await sql`SELECT COUNT(*)::int AS c FROM banks`;
+    console.log(
+      `\n✓ Done — ${rows.length.toLocaleString()} branches, ${banks[0]?.c} banks.\n`,
     );
-    process.stdout.write(`\r  ${Math.min(i + BATCH, rows.length)}/${rows.length}`);
+  } finally {
+    await sql.end();
   }
-  process.stdout.write('\n');
-
-  console.log('• Building bank aggregates…');
-  await db.execute({
-    sql: `INSERT INTO banks (slug, code, name, branch_count, updated_at)
-          SELECT bank_slug, MIN(bank_code), MIN(bank_name), COUNT(*), ?
-          FROM branches GROUP BY bank_slug`,
-    args: [updatedAt],
-  });
-
-  console.log('• Creating indexes…');
-  for (const sql of INDEXES) await db.execute(sql);
-
-  const banks = await db.execute('SELECT COUNT(*) AS c FROM banks');
-  console.log(
-    `\n✓ Done — ${rows.length.toLocaleString()} branches, ${banks.rows[0]?.c} banks.\n`,
-  );
 }
 
 main().catch((e) => die(e instanceof Error ? e.stack ?? e.message : String(e)));

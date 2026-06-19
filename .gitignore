@@ -31,3 +31,4 @@ yarn-error.log*
 *.db
 *.db-*
 /data/local.db
+.vercel
