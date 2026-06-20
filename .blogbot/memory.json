@@ -1,0 +1,122 @@
+{
+  "version": 1,
+  "siteBirth": "2026-06-19",
+  "lastRunAt": "2026-06-20T13:14:03.569Z",
+  "runs": [
+    {
+      "ts": "2026-06-20T13:12:16.585Z",
+      "phase": "seed",
+      "category": "transfers",
+      "keywordTier": "long-tail",
+      "primaryKeyword": "transfer money with IFSC code and account number",
+      "title": "How to Transfer Money With IFSC Code and Account Number",
+      "slug": "how-to-transfer-money-with-ifsc-code-and-account-number",
+      "wordCount": 1738
+    },
+    {
+      "ts": "2026-06-20T13:14:03.569Z",
+      "phase": "seed",
+      "category": "guides",
+      "keywordTier": "long-tail",
+      "primaryKeyword": "difference between IFSC code and MICR code",
+      "title": "Difference Between IFSC Code and MICR Code",
+      "slug": "difference-between-ifsc-code-and-micr-code",
+      "wordCount": 1661
+    }
+  ],
+  "usedKeywords": [
+    "transfer money with IFSC code and account number",
+    "difference between IFSC code and MICR code"
+  ],
+  "usedTitles": [
+    "How to Transfer Money With IFSC Code and Account Number",
+    "Difference Between IFSC Code and MICR Code"
+  ],
+  "usedSlugs": [
+    "how-to-transfer-money-with-ifsc-code-and-account-number",
+    "difference-between-ifsc-code-and-micr-code"
+  ],
+  "clusters": {
+    "NEFT": {
+      "members": [
+        "how-to-transfer-money-with-ifsc-code-and-account-number"
+      ],
+      "primaryKeywords": [
+        "transfer money with IFSC code and account number"
+      ]
+    },
+    "RTGS": {
+      "members": [
+        "how-to-transfer-money-with-ifsc-code-and-account-number"
+      ],
+      "primaryKeywords": [
+        "transfer money with IFSC code and account number"
+      ]
+    },
+    "IMPS": {
+      "members": [
+        "how-to-transfer-money-with-ifsc-code-and-account-number"
+      ],
+      "primaryKeywords": [
+        "transfer money with IFSC code and account number"
+      ]
+    },
+    "IFSC Code": {
+      "members": [
+        "how-to-transfer-money-with-ifsc-code-and-account-number"
+      ],
+      "primaryKeywords": [
+        "transfer money with IFSC code and account number"
+      ]
+    },
+    "Online Transfer": {
+      "members": [
+        "how-to-transfer-money-with-ifsc-code-and-account-number"
+      ],
+      "primaryKeywords": [
+        "transfer money with IFSC code and account number"
+      ]
+    },
+    "IFSC Codes": {
+      "members": [
+        "difference-between-ifsc-code-and-micr-code"
+      ],
+      "primaryKeywords": [
+        "difference between IFSC code and MICR code"
+      ]
+    },
+    "MICR Codes": {
+      "members": [
+        "difference-between-ifsc-code-and-micr-code"
+      ],
+      "primaryKeywords": [
+        "difference between IFSC code and MICR code"
+      ]
+    },
+    "Banking Basics": {
+      "members": [
+        "difference-between-ifsc-code-and-micr-code"
+      ],
+      "primaryKeywords": [
+        "difference between IFSC code and MICR code"
+      ]
+    },
+    "Cheque Book": {
+      "members": [
+        "difference-between-ifsc-code-and-micr-code"
+      ],
+      "primaryKeywords": [
+        "difference between IFSC code and MICR code"
+      ]
+    }
+  },
+  "phaseHistory": [
+    {
+      "ts": "2026-06-20T13:12:16.585Z",
+      "phase": "seed"
+    }
+  ],
+  "notes": [
+    "Next run, publish \"Difference Between IFSC Code and SWIFT Code\" to extend the comparison cluster and capture international transfer intent. Internally link this new guide to the recently published IFSC vs MICR post to establish a comprehensive banking codes hub for FY 2026-27."
+  ]
+}

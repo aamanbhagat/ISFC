@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="368" viewBox="0 0 920 368" role="img">
+  <rect width="920" height="368" fill="#ffffff"/>
+  <text x="40" y="44" font-family="system-ui,Segoe UI,Arial" font-size="24" font-weight="700" fill="#0b3d2e">Max Transfer Limit Per Transaction</text>
+  <line x1="40" y1="304" x2="880" y2="304" stroke="#e2e8f0" stroke-width="2"/>
+    <rect x="40.0" y="84.0" width="262.7" height="220" rx="6" fill="#10b981"/>
+    <text x="171.3" y="74.0" text-anchor="middle" font-family="system-ui,Segoe UI,Arial" font-size="20" font-weight="700" fill="#0b3d2e">10₹ l</text>
+    <text x="171.3" y="332.0" text-anchor="middle" font-family="system-ui,Segoe UI,Arial" font-size="17" fill="#475569">NEFT</text>
+    <rect x="328.7" y="194.0" width="262.7" height="110" rx="6" fill="#10b981"/>
+    <text x="460.0" y="184.0" text-anchor="middle" font-family="system-ui,Segoe UI,Arial" font-size="20" font-weight="700" fill="#0b3d2e">5₹ l</text>
+    <text x="460.0" y="332.0" text-anchor="middle" font-family="system-ui,Segoe UI,Arial" font-size="17" fill="#475569">IMPS</text>
+    <rect x="617.3" y="84.0" width="262.7" height="220" rx="6" fill="#10b981"/>
+    <text x="748.7" y="74.0" text-anchor="middle" font-family="system-ui,Segoe UI,Arial" font-size="20" font-weight="700" fill="#0b3d2e">10₹ l</text>
+    <text x="748.7" y="332.0" text-anchor="middle" font-family="system-ui,Segoe UI,Arial" font-size="17" fill="#475569">RTGS</text>
+</svg>
