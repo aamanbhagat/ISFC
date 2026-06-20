@@ -1,7 +1,7 @@
 {
   "version": 1,
   "siteBirth": "2026-06-19",
-  "lastRunAt": "2026-06-20T13:14:03.569Z",
+  "lastRunAt": "2026-06-20T13:36:22.329Z",
   "runs": [
     {
       "ts": "2026-06-20T13:12:16.585Z",
@@ -22,27 +22,68 @@
       "title": "Difference Between IFSC Code and MICR Code",
       "slug": "difference-between-ifsc-code-and-micr-code",
       "wordCount": 1661
+    },
+    {
+      "ts": "2026-06-20T13:27:20.662Z",
+      "phase": "seed",
+      "category": "transfers",
+      "keywordTier": "long-tail",
+      "primaryKeyword": "difference between IFSC code and SWIFT code",
+      "title": "Difference Between IFSC Code and SWIFT Code Explained",
+      "slug": "difference-between-ifsc-code-and-swift-code-explained",
+      "wordCount": 1745
+    },
+    {
+      "ts": "2026-06-20T13:33:44.465Z",
+      "phase": "seed",
+      "category": "banking",
+      "keywordTier": "long-tail",
+      "primaryKeyword": "how many digits in IFSC code",
+      "title": "How Many Digits in IFSC Code? Full 11-Character Format Explained",
+      "slug": "how-many-digits-in-ifsc-code-full-11-character-format-explained",
+      "wordCount": 2418
+    },
+    {
+      "ts": "2026-06-20T13:36:22.329Z",
+      "phase": "seed",
+      "category": "banking",
+      "keywordTier": "long-tail",
+      "primaryKeyword": "what happens if IFSC code is wrong",
+      "title": "What Happens If IFSC Code Is Wrong? Will Money Be Refunded?",
+      "slug": "what-happens-if-ifsc-code-is-wrong-will-money-be-refunded",
+      "wordCount": 2067
     }
   ],
   "usedKeywords": [
     "transfer money with IFSC code and account number",
-    "difference between IFSC code and MICR code"
+    "difference between IFSC code and MICR code",
+    "difference between IFSC code and SWIFT code",
+    "how many digits in IFSC code",
+    "what happens if IFSC code is wrong"
   ],
   "usedTitles": [
     "How to Transfer Money With IFSC Code and Account Number",
-    "Difference Between IFSC Code and MICR Code"
+    "Difference Between IFSC Code and MICR Code",
+    "Difference Between IFSC Code and SWIFT Code Explained",
+    "How Many Digits in IFSC Code? Full 11-Character Format Explained",
+    "What Happens If IFSC Code Is Wrong? Will Money Be Refunded?"
   ],
   "usedSlugs": [
     "how-to-transfer-money-with-ifsc-code-and-account-number",
-    "difference-between-ifsc-code-and-micr-code"
+    "difference-between-ifsc-code-and-micr-code",
+    "difference-between-ifsc-code-and-swift-code-explained",
+    "how-many-digits-in-ifsc-code-full-11-character-format-explained",
+    "what-happens-if-ifsc-code-is-wrong-will-money-be-refunded"
   ],
   "clusters": {
     "NEFT": {
       "members": [
-        "how-to-transfer-money-with-ifsc-code-and-account-number"
+        "how-to-transfer-money-with-ifsc-code-and-account-number",
+        "what-happens-if-ifsc-code-is-wrong-will-money-be-refunded"
       ],
       "primaryKeywords": [
-        "transfer money with IFSC code and account number"
+        "transfer money with IFSC code and account number",
+        "what happens if IFSC code is wrong"
       ]
     },
     "RTGS": {
@@ -63,10 +104,16 @@
     },
     "IFSC Code": {
       "members": [
-        "how-to-transfer-money-with-ifsc-code-and-account-number"
+        "how-to-transfer-money-with-ifsc-code-and-account-number",
+        "difference-between-ifsc-code-and-swift-code-explained",
+        "how-many-digits-in-ifsc-code-full-11-character-format-explained",
+        "what-happens-if-ifsc-code-is-wrong-will-money-be-refunded"
       ],
       "primaryKeywords": [
-        "transfer money with IFSC code and account number"
+        "transfer money with IFSC code and account number",
+        "difference between IFSC code and SWIFT code",
+        "how many digits in IFSC code",
+        "what happens if IFSC code is wrong"
       ]
     },
     "Online Transfer": {
@@ -95,10 +142,14 @@
     },
     "Banking Basics": {
       "members": [
-        "difference-between-ifsc-code-and-micr-code"
+        "difference-between-ifsc-code-and-micr-code",
+        "how-many-digits-in-ifsc-code-full-11-character-format-explained",
+        "what-happens-if-ifsc-code-is-wrong-will-money-be-refunded"
       ],
       "primaryKeywords": [
-        "difference between IFSC code and MICR code"
+        "difference between IFSC code and MICR code",
+        "how many digits in IFSC code",
+        "what happens if IFSC code is wrong"
       ]
     },
     "Cheque Book": {
@@ -107,6 +158,62 @@
       ],
       "primaryKeywords": [
         "difference between IFSC code and MICR code"
+      ]
+    },
+    "SWIFT Code": {
+      "members": [
+        "difference-between-ifsc-code-and-swift-code-explained"
+      ],
+      "primaryKeywords": [
+        "difference between IFSC code and SWIFT code"
+      ]
+    },
+    "International Transfers": {
+      "members": [
+        "difference-between-ifsc-code-and-swift-code-explained"
+      ],
+      "primaryKeywords": [
+        "difference between IFSC code and SWIFT code"
+      ]
+    },
+    "Banking Codes": {
+      "members": [
+        "difference-between-ifsc-code-and-swift-code-explained"
+      ],
+      "primaryKeywords": [
+        "difference between IFSC code and SWIFT code"
+      ]
+    },
+    "Money Transfers": {
+      "members": [
+        "difference-between-ifsc-code-and-swift-code-explained"
+      ],
+      "primaryKeywords": [
+        "difference between IFSC code and SWIFT code"
+      ]
+    },
+    "IFSC Format": {
+      "members": [
+        "how-many-digits-in-ifsc-code-full-11-character-format-explained"
+      ],
+      "primaryKeywords": [
+        "how many digits in IFSC code"
+      ]
+    },
+    "Bank Codes": {
+      "members": [
+        "how-many-digits-in-ifsc-code-full-11-character-format-explained"
+      ],
+      "primaryKeywords": [
+        "how many digits in IFSC code"
+      ]
+    },
+    "Transaction Refund": {
+      "members": [
+        "what-happens-if-ifsc-code-is-wrong-will-money-be-refunded"
+      ],
+      "primaryKeywords": [
+        "what happens if IFSC code is wrong"
       ]
     }
   },
@@ -117,6 +224,7 @@
     }
   ],
   "notes": [
-    "Next run, publish \"Difference Between IFSC Code and SWIFT Code\" to extend the comparison cluster and capture international transfer intent. Internally link this new guide to the recently published IFSC vs MICR post to establish a comprehensive banking codes hub for FY 2026-27."
+    "Next run, publish \"Difference Between IFSC Code and SWIFT Code\" to extend the comparison cluster and capture international transfer intent. Internally link this new guide to the recently published IFSC vs MICR post to establish a comprehensive banking codes hub for FY 2026-27.",
+    "Next run, target \"how to find new IFSC code after bank merger\" to capture high-intent users dealing with outdated branch codes, and internally link it to the \"What Happens If IFSC Code Is Wrong\" post to guide them through updating their beneficiary details."
   ]
 }

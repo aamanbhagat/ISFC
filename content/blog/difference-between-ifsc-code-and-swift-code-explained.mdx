@@ -1,0 +1,153 @@
+---
+title: Difference Between IFSC Code and SWIFT Code Explained
+description: >-
+  Learn the key difference between IFSC code and SWIFT code, including when to
+  use each for domestic and international money transfers in India.
+category: transfers
+tags:
+  - IFSC Code
+  - SWIFT Code
+  - International Transfers
+  - Banking Codes
+  - Money Transfers
+author: ifsckosh-desk
+publishedAt: '2026-06-20'
+cover: /blog/difference-between-ifsc-code-and-swift-code-explained/cover.svg
+coverAlt: Difference Between IFSC Code and SWIFT Code Explained
+status: published
+featured: false
+sponsored: false
+---
+
+If you have ever tried to send money abroad from your Indian bank account, you have likely hit a wall trying to figure out the difference between IFSC code and SWIFT code. Local bank transfers use an 11-digit IFSC code, while foreign wire transfers require a separate alphanumeric SWIFT code—and mixing them up will delay or reject your transaction. This guide breaks down exactly what each code does, how their formats differ, and which one you need for NEFT, RTGS, IMPS, and international transfers in 2026.
+
+
+<figure>
+  <img src="/blog/difference-between-ifsc-code-and-swift-code-explained/figure.svg" alt="Bank Code Character Lengths" width="920" height="368" />
+  <figcaption>Bank Code Character Lengths</figcaption>
+</figure>
+
+## What Is an IFSC Code? (Quick Recap)
+
+The Indian Financial System Code (IFSC) is an 11-character alphanumeric code assigned by the Reserve Bank of India (RBI) to every bank branch participating in electronic payment systems. It is mandatory for domestic fund transfers via NEFT, RTGS, and IMPS.
+
+The format follows a strict structure:
+
+- **First 4 characters**: Alphabetic bank code (e.g., HDFC for HDFC Bank, SBIN for State Bank of India)
+- **5th character**: Always zero, reserved for future use
+- **Last 6 characters**: Numeric or alphabetic branch code identifying the specific bank branch
+
+Example: `HDFC0001234` — HDFC Bank, branch code 001234.
+
+If you need to locate a specific branch code for a domestic transfer, you can [find IFSC code by branch name](/blog/how-to-find-ifsc-code-by-bank-branch-name) through the IFSCKosh database. The IFSC code ensures the RBI’s central payment systems route your money to the correct bank and branch. It has no role outside India’s domestic banking network.
+
+## What Is a SWIFT Code or BIC?
+
+A SWIFT code—also called a Bank Identifier Code (BIC)—is an internationally recognized standard used to identify banks and financial institutions globally. The Society for Worldwide Interbank Financial Telecommunication (SWIFT) network manages these codes. When you ask, "what is SWIFT code in banking," the simplest answer is: it is the global equivalent of an IFSC code, but it works across borders.
+
+A SWIFT code is 8 or 11 characters long and breaks down as:
+
+- **Characters 1-4**: Bank code (letters only)
+- **Characters 5-6**: ISO country code (letters only, e.g., IN for India)
+- **Characters 7-8**: Location code (alphanumeric, identifying the city)
+- **Characters 9-11**: Optional 3-character branch code (alphanumeric). If omitted, the code defaults to the bank’s primary office.
+
+Example: `HDFCINBB` — HDFC Bank, located in India (IN), Mumbai/Bombay (BB), primary office (no branch code appended).
+
+A bank’s SWIFT code format and meaning matters because international wire transfers pass through correspondent banking networks. The SWIFT network uses this code to route the message to the exact institution and branch handling foreign currency.
+
+## Key Differences Between IFSC Code and SWIFT Code
+
+The **difference between IFSC code and SWIFT code** comes down to jurisdiction, network, and purpose. IFSC codes are RBI-issued identifiers for India’s internal payment systems. SWIFT codes are globally recognized identifiers managed by an international cooperative, used to route cross-border payments.
+
+Here are the core differences:
+
+- **Issuer**: IFSC codes are issued by the RBI. SWIFT codes are registered with the SWIFT network (headquartered in Belgium).
+- **Length**: IFSC is always 11 characters. SWIFT is 8 or 11 characters.
+- **Geography**: IFSC is strictly domestic (within India). SWIFT is international.
+- **Payment systems**: IFSC is used for NEFT, RTGS, IMPS, and UPI-linked bank transfers. SWIFT is used for international wire transfers, foreign currency transactions, and cross-border trade settlements.
+- **Branch coverage**: Every NEFT/RTGS-enabled branch in India has an IFSC code. Only branches authorized to handle foreign exchange receive SWIFT codes.
+
+For a deeper look at domestic code identification, see our explainer on [IFSC vs MICR code differences](/blog/difference-between-ifsc-code-and-micr-code).
+
+## When to Use IFSC Code for Domestic Transfers
+
+You use an IFSC code every time you move money within India using a bank account number. This covers the major RBI-regulated payment systems:
+
+- **NEFT (National Electronic Funds Transfer)**: Batch processing system with no minimum or maximum limit. Settlement occurs in half-hourly batches. As of 2026, NEFT remains free for online transfers (via internet banking or mobile apps) up to ₹1,00,000, with nominal fees for higher amounts.
+- **RTGS (Real-Time Gross Settlement)**: Used for high-value transactions. The minimum amount is ₹2,00,000, with no upper limit. RTGS settles individually and immediately.
+- **IMPS (Immediate Payment Service)**: Available 24/7, 365 days a year. IMPS allows instant transfers up to ₹5,00,000 using a combination of mobile number and MMID, or account number plus IFSC.
+- **UPI (Unified Payments Interface)**: While UPI primarily uses Virtual Payment Addresses (VPAs), bank account-based UPI transfers and certain backend processes still rely on IFSC validation.
+
+To execute any of these, you must add the beneficiary's bank account number and their bank branch's IFSC code to your banking app or internet banking portal. If you are unsure how the process works end-to-end, read our guide on how to [transfer money with IFSC code and account number](/blog/how-to-transfer-money-with-ifsc-code-and-account-number).
+
+## When to Use SWIFT Code for International Transfers
+
+You need a SWIFT code when sending or receiving money from a foreign country. This includes:
+
+- **Inward remittances**: Receiving salary, freelance payments, or family transfers from abroad into your NRE/NRO or resident Indian savings account.
+- **Outward remittances**: Sending money overseas under the Liberalised Remittance Scheme (LRS) for education, medical expenses, or investments. In FY 2026-27, the LRS limit remains USD 250,000 per financial year per resident individual.
+- **Trade payments**: Importers and exporters use SWIFT to settle invoices in foreign currency.
+- **NRI banking**: Non-Resident Indians repatriating funds from NRE accounts to foreign accounts rely on SWIFT codes for the overseas leg of the transfer.
+
+When initiating an international wire, your bank will ask for the beneficiary’s name, their bank account number or IBAN (if applicable), and the beneficiary bank’s SWIFT/BIC code. If you are receiving funds, you must provide your Indian bank’s SWIFT code, your account number, and your branch details to the sender.
+
+The IFSC vs SWIFT code for international transfers debate ends here: IFSC does not function on the SWIFT network. Only the SWIFT code routes the cross-border leg of the transaction.
+
+## Can IFSC Code Be Used for International Transfers?
+
+This is the most common point of confusion. The question "can IFSC code be used for international transfers" has a clear answer: No.
+
+The SWIFT network and the RBI’s domestic payment systems (NEFT, RTGS, IMPS) operate on entirely different messaging networks. IFSC codes are not recognized by international correspondent banks. If a sender abroad tries to use your branch’s IFSC code instead of the SWIFT code, the transfer will fail or be returned after several banking days.
+
+However, there is one nuance. Some Indian banks have integrated domestic IFSC codes into international payment routing for specific partner networks (like the Gulf countries' remittance corridors). In these cases, the foreign bank’s system may accept the IFSC code to route the payment to the Indian bank, which then credits the beneficiary. But this is a proprietary feature of specific remittance providers, not a general SWIFT network feature. For standard international wire transfers via the SWIFT network, you must provide the SWIFT code.
+
+If your branch does not have a SWIFT code, you can use the SWIFT code of your bank's nearest foreign exchange–enabled branch or the bank's main NRI/corporate branch. The funds will arrive at that SWIFT-enabled branch and be internally routed to your specific branch using its IFSC code.
+
+## How to Find Your Bank's SWIFT Code
+
+Not every Indian bank branch has a SWIFT code. Only branches licensed by the RBI to handle foreign exchange transactions are assigned one. If you need to receive an international transfer, here is how to find the correct SWIFT code:
+
+1. **Check your bank statement or passbook**: Many banks print the branch SWIFT code on the first page of the passbook or on monthly statements.
+2. **Visit the bank’s official website**: Most Indian banks list their SWIFT-enabled branches in an NRI banking or international banking section.
+3. **Use the SWIFT directory**: The official SWIFT network offers an online directory where you can search by bank name and country.
+4. **Call your branch**: Call your home branch directly and ask if they are authorized to handle foreign currency. If they are not, ask for the nearest SWIFT-enabled branch of your bank.
+5. **Check IFSCKosh**: Use [IFSCKosh banking guides](/blog) to locate branch-specific details and verify formats.
+
+Always double-check the SWIFT code with your bank before sharing it with the sender. A wrong SWIFT code will route your money to the wrong bank or country, and recovering those funds is slow and costly.
+
+## IFSC vs SWIFT: Quick Comparison Table
+
+| Feature | IFSC Code | SWIFT Code (BIC) |
+| --- | --- | --- |
+| Full form | Indian Financial System Code | Society for Worldwide Interbank Financial Telecommunication code |
+| Network | RBI domestic payment systems | SWIFT international network |
+| Geography | India only | Global |
+| Length | 11 characters | 8 or 11 characters |
+| Format | 4-letter bank code + 0 + 6-digit branch code | 4-letter bank code + 2-letter country code + 2-character location code + optional 3-character branch code |
+| Issuer | Reserve Bank of India | SWIFT network |
+| Used for | NEFT, RTGS, IMPS, UPI backend | International wire transfers, foreign currency transactions, NRI remittances |
+| Branch coverage | Every electronic banking-enabled branch | Only foreign exchange–authorized branches |
+| Example | `SBIN0001234` | `SBININBB123` |
+
+## Frequently asked questions
+
+### Can I use IFSC code for international money transfers?
+
+No, IFSC codes are only for domestic transfers within India via NEFT, RTGS, or IMPS. For international wire transfers, you need your bank's SWIFT code.
+
+### Is SWIFT code the same as IFSC code?
+
+No, a SWIFT code (also called BIC) identifies banks globally for international transfers, while an IFSC code identifies specific bank branches in India for domestic transfers.
+
+### Do all Indian bank branches have a SWIFT code?
+
+No, only branches authorized to handle foreign currency transactions are assigned SWIFT codes. Check with your bank or branch if you need one.
+
+### How many characters is a SWIFT code?
+
+A SWIFT code is 8 or 11 characters long, combining a 4-letter bank code, 2-letter country code, 2-character location code, and an optional 3-character branch code.
+
+### Where can I find my bank's SWIFT code?
+
+You can find your bank's SWIFT code on your bank statement, passbook, the bank's official website, or by contacting your branch directly.
