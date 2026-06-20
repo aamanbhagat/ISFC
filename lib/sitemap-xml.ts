@@ -10,6 +10,7 @@ import {
   listStates,
 } from '@/lib/db';
 import { SITE_URL, urls } from '@/lib/seo';
+import { getAllPosts } from '@/lib/blog';
 
 // One URL per resource, ≤50,000 URLs per child sitemap (Google's hard limit).
 export const SHARD_SIZE = 45000;
@@ -130,7 +131,17 @@ export async function pagesSitemapXml(): Promise<string> {
     })),
   ].map((r) => ({ ...r, lastmod }));
 
-  return urlset(rows);
+  const blogRows = [
+    { loc: `${SITE_URL}/blog`, lastmod, changefreq: 'weekly', priority: '0.6' },
+    ...getAllPosts().map((p) => ({
+      loc: `${SITE_URL}/blog/${p.slug}`,
+      lastmod: new Date(p.frontmatter.updatedAt || p.frontmatter.publishedAt).toISOString(),
+      changefreq: 'monthly',
+      priority: '0.6',
+    })),
+  ];
+
+  return urlset([...rows, ...blogRows]);
 }
 
 // ── branches shard ───────────────────────────────────────────
